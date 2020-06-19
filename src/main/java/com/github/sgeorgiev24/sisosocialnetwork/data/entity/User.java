@@ -8,7 +8,6 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity implements UserDetails {
-//  username, email, password, imageUrl, posts, role
   private String username;
   private String email;
   private String password;
