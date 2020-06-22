@@ -10,12 +10,12 @@ public class HomeController extends BaseController {
   @GetMapping("/")
   @PreAuthorize("isAnonymous()")
   public ModelAndView getIndex() {
-    return view("index");
+    return view("index", "Home");
   }
 
   @GetMapping("/home")
   @PreAuthorize("isAuthenticated()")
   public ModelAndView getHome() {
-    return view("home");
+    return view("home", "Home");
   }
 }
