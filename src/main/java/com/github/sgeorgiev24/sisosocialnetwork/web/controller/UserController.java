@@ -50,9 +50,11 @@ public class UserController extends BaseController {
 
     UserServiceModel userServiceModel = modelMapper
             .map(model, UserServiceModel.class);
-    userServiceModel.setProfileImageUrl(cloudinaryService
-            .uploadImage(model.getProfileImageUrl()));
 
+    if (!"".equals(model.getProfileImageUrl().getOriginalFilename())) {
+      userServiceModel.setProfileImageUrl(cloudinaryService
+              .uploadImage(model.getProfileImageUrl()));
+    }
     userService.registerUser(userServiceModel);
 
     return redirect("login", "Login");
