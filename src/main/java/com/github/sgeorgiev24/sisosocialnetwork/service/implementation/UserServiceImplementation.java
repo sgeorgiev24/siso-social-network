@@ -8,6 +8,8 @@ import com.github.sgeorgiev24.sisosocialnetwork.service.RoleService;
 import com.github.sgeorgiev24.sisosocialnetwork.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -52,5 +54,12 @@ public class UserServiceImplementation implements UserService {
             .encode(userServiceModel.getPassword()));
 
     userRepository.save(user);
+  }
+
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    return userRepository.findByUsername(username)
+            .orElseThrow(() ->
+                    new UsernameNotFoundException("Username not found."));
   }
 }
