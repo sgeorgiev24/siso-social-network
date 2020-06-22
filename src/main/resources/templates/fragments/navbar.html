@@ -1,26 +1,33 @@
 <th:block>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded font-weight-bold">
+        <a class="navbar-brand" href="/">SISO SOCIAL NETWORK</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
     <th:block sec:authorize="isAnonymous()">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light rounded font-weight-bold">
-            <a class="navbar-brand" href="/">SISO SOCIAL NETWORK</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" th:href="@{/}">Home</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" th:href="@{/users/login}">Login</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" th:href="@{/users/register}">Register</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/users/login}">Login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/users/register}">Register</a>
+                </li>
+            </ul>
     </th:block>
     <th:block sec:authorize="isAuthenticated()">
-
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/home}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
     </th:block>
+        </div>
+    </nav>
 </th:block>
