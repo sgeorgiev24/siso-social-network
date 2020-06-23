@@ -6,16 +6,13 @@ import com.github.sgeorgiev24.sisosocialnetwork.model.service.PostServiceModel;
 import com.github.sgeorgiev24.sisosocialnetwork.repository.PostRepository;
 import com.github.sgeorgiev24.sisosocialnetwork.repository.UserRepository;
 import com.github.sgeorgiev24.sisosocialnetwork.service.PostService;
-import com.github.sgeorgiev24.sisosocialnetwork.service.UserService;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 @Service
 public class PostServiceImplementation implements PostService {

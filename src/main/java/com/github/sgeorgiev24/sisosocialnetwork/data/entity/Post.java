@@ -1,7 +1,7 @@
 package com.github.sgeorgiev24.sisosocialnetwork.data.entity;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "posts")

@@ -4,12 +4,11 @@ import com.github.sgeorgiev24.sisosocialnetwork.data.entity.Role;
 import com.github.sgeorgiev24.sisosocialnetwork.model.service.RoleServiceModel;
 import com.github.sgeorgiev24.sisosocialnetwork.repository.RoleRepository;
 import com.github.sgeorgiev24.sisosocialnetwork.service.RoleService;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class RoleServiceImplementation implements RoleService {

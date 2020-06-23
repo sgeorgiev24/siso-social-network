@@ -1,10 +1,5 @@
 package com.github.sgeorgiev24.sisosocialnetwork.model.view;
 
-import com.github.sgeorgiev24.sisosocialnetwork.mapping.IHaveCustomMappings;
-import com.github.sgeorgiev24.sisosocialnetwork.model.service.PostServiceModel;
-import org.modelmapper.ModelMapper;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDateTime;
 
 public class PostViewModel {

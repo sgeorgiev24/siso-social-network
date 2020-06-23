@@ -4,15 +4,16 @@ import com.github.sgeorgiev24.sisosocialnetwork.external.CloudinaryService;
 import com.github.sgeorgiev24.sisosocialnetwork.model.binding.UserRegisterBindingModel;
 import com.github.sgeorgiev24.sisosocialnetwork.model.service.UserServiceModel;
 import com.github.sgeorgiev24.sisosocialnetwork.service.UserService;
+import java.io.IOException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.io.IOException;
 
 @Controller
 @RequestMapping("/users")

@@ -1,15 +1,14 @@
 package com.github.sgeorgiev24.sisosocialnetwork.mapping;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
-import org.springframework.core.type.filter.AssignableTypeFilter;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
+import org.springframework.core.type.filter.AssignableTypeFilter;
 
 public class MappingsInitializer {
   private static final String ROOT_PACKAGE_NAME = "com.github.sgeorgiev24.sisosocialnetwork";
@@ -53,7 +52,10 @@ public class MappingsInitializer {
       Method method = klass.getDeclaredMethod(methodName, ModelMapper.class);
       var obj = klass.newInstance();
       method.invoke(obj, params);
-    } catch (IllegalAccessException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
+    } catch (IllegalAccessException
+            | InvocationTargetException
+            | InstantiationException
+            | NoSuchMethodException e) {
       e.printStackTrace();
     }
   }

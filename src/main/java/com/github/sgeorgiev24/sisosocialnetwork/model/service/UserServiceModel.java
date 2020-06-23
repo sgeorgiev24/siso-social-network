@@ -1,7 +1,5 @@
 package com.github.sgeorgiev24.sisosocialnetwork.model.service;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.Set;
 
 public class UserServiceModel {

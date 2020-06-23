@@ -6,14 +6,13 @@ import com.github.sgeorgiev24.sisosocialnetwork.repository.RoleRepository;
 import com.github.sgeorgiev24.sisosocialnetwork.repository.UserRepository;
 import com.github.sgeorgiev24.sisosocialnetwork.service.RoleService;
 import com.github.sgeorgiev24.sisosocialnetwork.service.UserService;
+import java.util.LinkedHashSet;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.LinkedHashSet;
 
 @Service
 public class UserServiceImplementation implements UserService {

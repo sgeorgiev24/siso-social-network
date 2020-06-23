@@ -1,9 +1,8 @@
 package com.github.sgeorgiev24.sisosocialnetwork.data.entity;
 
-import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.persistence.*;
 import java.util.Set;
+import javax.persistence.*;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users")

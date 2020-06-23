@@ -1,9 +1,8 @@
 package com.github.sgeorgiev24.sisosocialnetwork.data.entity;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name = "roles")
