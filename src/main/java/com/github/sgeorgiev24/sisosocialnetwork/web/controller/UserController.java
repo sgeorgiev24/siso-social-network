@@ -1,10 +1,13 @@
 package com.github.sgeorgiev24.sisosocialnetwork.web.controller;
 
 import com.github.sgeorgiev24.sisosocialnetwork.external.CloudinaryService;
+import com.github.sgeorgiev24.sisosocialnetwork.model.binding.UserEditBindingModel;
 import com.github.sgeorgiev24.sisosocialnetwork.model.binding.UserRegisterBindingModel;
 import com.github.sgeorgiev24.sisosocialnetwork.model.service.UserServiceModel;
 import com.github.sgeorgiev24.sisosocialnetwork.service.UserService;
 import java.io.IOException;
+import java.security.Principal;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -63,5 +66,39 @@ public class UserController extends BaseController {
   @PreAuthorize("isAnonymous()")
   public ModelAndView getLogin() {
     return view("users/login", "Login");
+  }
+
+  @GetMapping("/profile")
+  @PreAuthorize("isAuthenticated()")
+  public ModelAndView getProfile(
+          Principal principal,
+          ModelAndView modelAndView) {
+    UserServiceModel userServiceModel = userService
+            .findByUsername(principal.getName());
+    modelAndView.addObject("model", userServiceModel);
+
+    return view("users/edit-profile", modelAndView);
+  }
+
+  @PostMapping("/profile")
+  @PreAuthorize("isAuthenticated()")
+  public ModelAndView postProfile(
+          @ModelAttribute UserEditBindingModel model,
+          ModelAndView modelAndView)
+          throws IOException {
+    UserServiceModel userServiceModel = modelMapper
+            .map(model, UserServiceModel.class);
+
+    if (model.getProfileImageUrl() != null) {
+      userServiceModel.setProfileImageUrl(cloudinaryService
+              .uploadImage(model.getProfileImageUrl()));
+    }
+
+    userService.editProfile(userServiceModel, model.getOldPassword());
+
+    return view(
+            "users/view/" + model.getUsername(),
+            modelAndView,
+            "Edit profile");
   }
 }

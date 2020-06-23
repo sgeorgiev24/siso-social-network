@@ -41,7 +41,7 @@
 
         return '<div class="card">'
                 + '<div class="card-body">'
-                    + `<h5 class="card-title">Posted by <a href="/users/${post.creator}" class="card-link">${post.creator}</a></h5>`
+                    + `<h5 class="card-title">Posted by <a href="/users/view/${post.creator}" class="card-link">${post.creator}</a></h5>`
                     + `<h6 class="card-subtitle mb-2 text-muted">on ${createdOn[0] + ' at ' + createdOn[1]}</h6>`
                     + '<hr>'
                     + `<p class="card-text" th:text="${post.content}">${post.content}</p>`
