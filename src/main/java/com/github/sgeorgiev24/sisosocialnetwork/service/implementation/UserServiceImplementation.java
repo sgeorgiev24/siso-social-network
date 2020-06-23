@@ -57,6 +57,16 @@ public class UserServiceImplementation implements UserService {
   }
 
   @Override
+  public UserServiceModel findByUsername(String username) {
+    User user = userRepository
+            .findByUsername(username)
+            .orElseThrow(() ->
+                    new UsernameNotFoundException("Username not found."));
+
+    return modelMapper.map(user, UserServiceModel.class);
+  }
+
+  @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     return userRepository.findByUsername(username)
             .orElseThrow(() ->

@@ -32,7 +32,6 @@ public class Post extends BaseEntity {
   }
 
   @ManyToOne
-  @JoinColumn(name = "creator_id", nullable = false)
   public User getCreator() {
     return creator;
   }

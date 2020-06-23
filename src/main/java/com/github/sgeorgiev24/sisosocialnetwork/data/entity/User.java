@@ -68,7 +68,8 @@ public class User extends BaseEntity implements UserDetails {
     this.profileImageUrl = imageUrl;
   }
 
-  @OneToMany(mappedBy = "creator")
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JoinColumn(name = "creator")
   public Set<Post> getPosts() {
     return posts;
   }
@@ -78,7 +79,10 @@ public class User extends BaseEntity implements UserDetails {
   }
 
   @Override
-  @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
+  @ManyToMany(
+          targetEntity = Role.class,
+          fetch = FetchType.EAGER,
+          cascade = CascadeType.ALL)
   @JoinTable(
           name = "users_roles",
           joinColumns = @JoinColumn(
