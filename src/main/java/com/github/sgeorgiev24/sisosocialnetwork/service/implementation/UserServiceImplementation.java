@@ -1,13 +1,18 @@
 package com.github.sgeorgiev24.sisosocialnetwork.service.implementation;
 
 import com.github.sgeorgiev24.sisosocialnetwork.data.entity.User;
-import com.github.sgeorgiev24.sisosocialnetwork.external.CloudinaryService;
+import com.github.sgeorgiev24.sisosocialnetwork.model.service.PostServiceModel;
 import com.github.sgeorgiev24.sisosocialnetwork.model.service.UserServiceModel;
+import com.github.sgeorgiev24.sisosocialnetwork.model.service.UserViewProfileServiceModel;
+import com.github.sgeorgiev24.sisosocialnetwork.model.view.PostViewModel;
+import com.github.sgeorgiev24.sisosocialnetwork.repository.PostRepository;
 import com.github.sgeorgiev24.sisosocialnetwork.repository.RoleRepository;
 import com.github.sgeorgiev24.sisosocialnetwork.repository.UserRepository;
 import com.github.sgeorgiev24.sisosocialnetwork.service.RoleService;
 import com.github.sgeorgiev24.sisosocialnetwork.service.UserService;
 import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +27,7 @@ public class UserServiceImplementation implements UserService {
   private final ModelMapper modelMapper;
   private final BCryptPasswordEncoder bCryptPasswordEncoder;
   private final UserRepository userRepository;
-  private final CloudinaryService cloudinaryService;
+  private final PostRepository postRepository;
 
   @Autowired
   public UserServiceImplementation(
@@ -31,13 +36,13 @@ public class UserServiceImplementation implements UserService {
           ModelMapper modelMapper,
           BCryptPasswordEncoder bCryptPasswordEncoder,
           UserRepository userRepository,
-          CloudinaryService cloudinaryService) {
+          PostRepository postRepository) {
     this.roleService = roleService;
     this.roleRepository = roleRepository;
     this.modelMapper = modelMapper;
     this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     this.userRepository = userRepository;
-    this.cloudinaryService = cloudinaryService;
+    this.postRepository = postRepository;
   }
 
   @Override
@@ -92,6 +97,24 @@ public class UserServiceImplementation implements UserService {
     }
 
     userRepository.save(user);
+  }
+
+  @Override
+  public UserViewProfileServiceModel loadUserProfile(String username) {
+    User user = userRepository.findByUsername(username)
+            .orElseThrow(() ->
+                    new UsernameNotFoundException("Username not found."));
+
+    Set<PostServiceModel> postServiceModelSet = postRepository
+            .findAllByCreator(user)
+            .stream()
+            .map(post -> modelMapper.map(post, PostServiceModel.class))
+            .collect(Collectors.toSet());
+
+    var result = modelMapper.map(user, UserViewProfileServiceModel.class);
+    result.setPosts(postServiceModelSet);
+
+    return result;
   }
 
   @Override
