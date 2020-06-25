@@ -92,7 +92,7 @@ public class UserServiceImplementation implements UserService {
               .encode(userServiceModel.getPassword()));
     }
 
-    if (userServiceModel.getProfileImageUrl() != null) {
+    if (userServiceModel.getProfileImageUrl().startsWith("http")) {
       user.setProfileImageUrl(userServiceModel.getProfileImageUrl());
     }
 

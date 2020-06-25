@@ -70,9 +70,6 @@ public class UserController extends BaseController {
   public ModelAndView getProfile(
           Principal principal,
           ModelAndView modelAndView) {
-    /*
-     * TODO: Refresh user data immediately, now it is refreshed on next login.
-     */
     UserServiceModel userServiceModel = userService
             .findByUsername(principal.getName());
     modelAndView.addObject("model", userServiceModel);
@@ -83,23 +80,19 @@ public class UserController extends BaseController {
   @PostMapping("/profile")
   @PreAuthorize("isAuthenticated()")
   public ModelAndView postProfile(
-          @ModelAttribute UserEditBindingModel model,
-          ModelAndView modelAndView)
+          @ModelAttribute UserEditBindingModel model)
           throws IOException {
     UserServiceModel userServiceModel = modelMapper
             .map(model, UserServiceModel.class);
 
-    if (model.getProfileImageUrl() != null) {
+    if (!"".equals(model.getProfileImageUrl().getOriginalFilename())) {
       userServiceModel.setProfileImageUrl(cloudinaryService
               .uploadImage(model.getProfileImageUrl()));
     }
 
     userService.editProfile(userServiceModel, model.getOldPassword());
 
-    return view(
-            "users/view/" + model.getUsername(),
-            modelAndView,
-            "Edit profile");
+    return redirect("view/" + model.getUsername());
   }
 
   @GetMapping("/view/{username}")
